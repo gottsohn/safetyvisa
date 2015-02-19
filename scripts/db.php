@@ -1,5 +1,4 @@
 <?php
-
 if(strstr($_SERVER['HTTP_HOST'],".com")) {
   define("PTH","/");
 }
@@ -25,7 +24,7 @@ define('CONSUMER_KEY', 'cMavPzut7OkNxPl0YzDRKg');
 define('CONSUMER_SECRET', 'gXeWF7tXQY6YHYCfOr8XVka90tKIRQVmxOjzKsPXU');
 define('OAUTH_CALLBACK', "http://".$_SERVER['HTTP_HOST'].PTH.'RK/callback.php');
 
-$scriptsArray = array('scripts/json2','lib/lodash/dist/lodash.min','lib/moment/moment', 'lib/angular/angular.min', 'lib/angular-ui-router/release/angular-ui-router.min', 'lib/angular-animate/angular-animate', 'lib/angular-aria/angular-aria', 'lib/angular-cookies/angular-cookies', 'lib/angular-elastic/elastic', 'lib/hammerjs/hammer', 'lib/angular-material/angular-material', 'js/application');
+$scriptsArray = array('js/json2','lib/lodash/dist/lodash.min','lib/moment/moment', 'lib/angular/angular.min', 'lib/angular-ui-router/release/angular-ui-router.min', 'lib/angular-animate/angular-animate', 'lib/angular-aria/angular-aria', 'lib/angular-cookies/angular-cookies', 'lib/angular-elastic/elastic', 'lib/hammerjs/hammer', 'lib/angular-material/angular-material', 'js/application');
 $stylesArray = array("lib/angular-material/angular-material");
 $menuitems = array("Download","About"/*,"Contact"*/);
 class db

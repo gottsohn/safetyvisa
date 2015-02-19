@@ -2,7 +2,7 @@
   error_reporting(-1);
 
   include('./flight/Flight.php');
-  include('./public/scripts/db.php');
+  include('./scripts/db.php');
 
   Flight::set('flight.views.path', 'views');
 
