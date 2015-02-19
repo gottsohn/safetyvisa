@@ -1,0 +1,74 @@
+<md-content layout="column" layout-fill="layout-fill" class="md-default-theme no-bg">
+  <section layout="row" flex="flex">
+    <md-sidenav md-component-id="left" md-is-locked-open="$media('gt-md')" flex="30" class="md-sidenav-left md-whiteframe-z2">
+      <md-toolbar>
+        <div class="md-toolbar-tools">
+          <h1>AndeLabs Categories</h1>
+        </div>
+      </md-toolbar>
+      <md-list>
+        <md-item ng-repeat="category in categories">
+          <md-card>
+            <md-item-content>
+              <div flex="10" class="md-tile-left">
+                <i ng-style="{color: category.color}" class="fa fa-3x fa-flask"></i>
+              </div>
+              <div flex="70" class="md-tile-content">
+                <h3>{{category.name}}</h3>
+              </div><!--on switch turn off all other switches-->
+              <div flex="15" class="md-tile-right">
+                <md-switch aria-label="Switch Category" ng-model="category.on" ng-init="false" ng-change="switchOnChange($index, data.cb2)">
+              </md-switch>
+              </div>
+            </md-item-content>
+          </md-card>
+        </md-item>
+      </md-list>
+    </md-sidenav>
+    <md-content flex="flex" ng-if="!selectedCategory">
+      <md-toolbar id="home-toolbar">
+        <div class="md-toolbar-tools md-accent">
+          <h1>Scoreboard</h1>
+          <span flex="flex" layout="row" layout-align="end center">
+            <md-button id="copy" ng-click="copyUID()" aria-label="Copy Andelabs id">
+              <i class="fa fa-copy"></i>
+              <md-tooltip>Copy your AndeLabs UID</md-tooltip>
+            </md-button>
+            <md-button ng-click="showBottomSheet($event)" aria-label="Menu">
+              <i class="fa fa-ellipsis-v"></i>
+              <md-tooltip>Menu</md-tooltip>
+            </md-button>
+          </span>
+        </div>
+      </md-toolbar>
+      <md-card>
+        <md-whiteframe-z2 layout="row" layout-padding="layout-padding" layout-margin="layout-margin">
+          <h2>Progress</h2>
+          <md-progress-linear md-mode="determinate" ng-value="{{getTotalProgress()}}" style="margin: 1.5em 0; margin-left: 1em; width: 92%">
+          </md-progress-linear>
+        </md-whiteframe-z2>
+        <md-whiteframe-z2 style="margin-left: 10px" class="md-grid">
+          <category-score ng-repeat="category in categories" layout-fill="layout-fill">
+          </category-score>
+        </md-whiteframe-z2>
+      </md-card>
+    </md-content>
+    <md-content flex="flex" ng-if="selectedCategory">
+      <md-toolbar id="home-toolbar"><div layout="row" class="md-toolbar-tools md-accent">
+        <h2>{{selectedCategory.name}}</h2>
+        <span flex="flex" layout="row" layout-align="end center">
+          <md-button id="copy" ng-click="copyUID()" aria-label="Copy Andelabs id">
+            <i class="fa fa-copy"></i>
+            <md-tooltip>Copy your AndeLabs UID</md-tooltip>
+          </md-button>
+          <md-button ng-click="viewScoreboard()" aria-label="Menu">
+            <i class="fa fa-table"></i>
+            <md-tooltip>View Scoreboard</md-tooltip>
+          </md-button>
+          <md-button ng-click="showBottomSheet($event)" aria-label="Menu">
+            <i class="fa fa-ellipsis-v"></i>
+            <md-tooltip>Menu</md-tooltip>
+          </md-button>
+        </span>
+      </div>
+    </md-toolbar><md-item ng-repeat="lab in labs | filter:{ category: selectedCategory }"><md-card><md-list><md-item-content><div style="margin-left: 5px" class="md-tile-left"><i ng-style="{color: lab.category.color}" class="fa fa-3x fa-github"></i></div><div class="md-tile-content"><h3>{{lab.name}}</h3><h4>{{lab.description}}</h4></div><div style="margin-right: 5px" class="md-tile-right"><a href="{{lab.url}}" target="{{lab.slug}}"><md-button aria-label="Start Lab" ng-click="startLab(lab)" ng-if="labStatus(lab) === 1" class="md-warn md-fab"><i class="fa fa-rocket fa-lg"></i><md-tooltip>Start This Lab</md-tooltip></md-button></a><a href="{{lab.url}}" target="_blank" ng-if="labStatus(lab) === 2"><md-button aria-label="Incomplete Lab" class="md-accent md-fab"><i class="fa fa-clock-o fa-lg"></i><md-tooltip>You are still working on this lab</md-tooltip></md-button></a><a href="{{lab.url}}" target="_blank" ng-if="labStatus(lab) === 3"><md-button aria-label="Completed Lab" class="md-primary md-fab"><i class="fa fa-check-circle fa-lg"></i><md-tooltip>This Lab is Complete!</md-tooltip></md-button></a></div></md-item-content></md-list></md-card></md-item></md-content></section></md-content>
